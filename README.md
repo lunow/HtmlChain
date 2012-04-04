@@ -1,6 +1,6 @@
 # The HtmlChain
 
-The HtmlChain is a small class for creating code with php.
+The HtmlChain is a small class for creating code with PHP:
 
 	$html = new HtmlChain();
 	echo $html->div();
@@ -40,11 +40,11 @@ With this result:
 
 ## Named Div Container
 
-The Chain recognize next elements and try to close it for you.
+The Chain recognize next elements and try to close it for you:
 
 	echo $html->div()->div();
 
-Will result in
+Will result in:
 
 	<div></div>
 	<div></div>
@@ -80,13 +80,38 @@ The result is a perfect structured, right indented html output:
 		</div>
 	</div>
 
+Sometimes there are problems, e.g.:
+
+	echo $html->h1('Hello')->p('World');
+
+Results in:
+	
+	<h1>Hello<p>World</p></h1>
+
+But there are a solution, its named `end()` (or `close()` with the shortcut `c()`):
+
+	echo $html->h1('Hello')->end()->p('World');
+
+And you get:
+
+	<h1>Hello</h1>
+	<p>World</p>
+
+
+
 ## Tags, Content and Attributes
 
-With the magic `__call()` function you can use nearly every tag as a nativ function.
+With the magic `__call()` function you can use nearly every tag as a nativ function. So start with:
+
+	echo $html->form();
+	//or
+	echo $html->table()->tr()->td('Cell 1')->td('Cell 2');
 
 Pass a string as content and/or an array with attributes:
 
 	echo $html->div('Hello', array('rel' => 'home'));
+	//alternativ
+	echo $html->div('Hello', ['rel' => 'home']); //hello php 5.4, yeah!!
 
 Output:
 
@@ -94,7 +119,7 @@ Output:
 
 ## Special Tags
 
-There are a few special tags for being faster:
+There are a few special tags for faster code creation:
 
 	$html->doctype(); //<!DOCTYPE html>
 	$html->mailto('info@domain.com'); //<a href="mailto:info@domain.com">info@domain.com</a>
