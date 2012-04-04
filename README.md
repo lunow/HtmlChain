@@ -1,6 +1,6 @@
 # The HtmlChain
 
-The HtmlChain is a small class for creating code with PHP:
+The HtmlChain is a small class for creating **HTML** code with **PHP**:
 
 	$html = new HtmlChain();
 	echo $html->div();
