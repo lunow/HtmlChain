@@ -36,9 +36,20 @@
 			$this->assertEquals($code, $this->html->div(array('autodiscover')));
 		}
 
+		public function testAttributeWithAndWithoutValue() {
+			$code = '<div autodiscover class="cool"></div>';
+			$this->assertEquals($code, $this->html->div(array('class' => 'cool', 'autodiscover')));
+			//this one fails because ksort() dont sort values without a key :(
+			//@TODO: fix this!
+			//$this->assertEquals($code, $this->html->div(array('autodiscover', 'class' => 'cool')));
+		}
+
 		public function testOrderOfAttribute() {
 			$code = '<div a="1" b="2" c="3"></div>';
 			$this->assertEquals($this->html->div(array('c' => '3', 'a' => '1', 'b' => '2')), $code);
+
+			$code = '<div a="x" b="x" c="x"></div>';
+			$this->assertEquals($this->html->div(array('c' => 'x', 'a' => 'x', 'b' => 'x')), $code);
 		}
 
 		public function testSimpleDivWithContent() {
